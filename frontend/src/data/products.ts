@@ -12,7 +12,7 @@ export const products: Product[] = [
         description: ["модель: оверсайз крой, декоративные наружные швы, накидка на спине",
         "акцентные элементы: вышивка, прочная DTF печать",
         "материал: футер трехнитка (100% хлопок)"],
-        vkUrl: "https://vk.com/",
+        vkUrl: "https://vk.ru/market/product/quotbiohazardquot-t-shirt-228893168-13144737",
     },
     {
         id: "bomber",
