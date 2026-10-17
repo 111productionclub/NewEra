@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NewEra</title>
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__bg"></div>
+    <div class="header__inner">
+      <button class="header__btn header__btn--menu" type="button" aria-label="Меню">
+        <img src="assets/icons/menu.svg" alt="">
+      </button>
+      <a class="header__logo" href="index.html" aria-label="NewEra — главная">
+        <img src="assets/img/logo.png" alt="NewEra">
+      </a>
+      <button class="header__btn header__btn--cart" type="button" aria-label="Корзина">
+        <img src="assets/icons/cart.svg" alt="">
+        <span class="header__badge" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="main">
+    <h1 class="section-title">
+      Section
+      <svg viewBox="0 0 12 16" fill="none" aria-hidden="true">
+        <path d="M6 0v15M1 10l5 5 5-5" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </h1>
+
+    <div class="grid" data-products></div>
+  </main>
+
+  <footer class="footer">
+    <a class="footer__link" href="#">Соц Сети</a>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

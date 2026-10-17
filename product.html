@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NewEra</title>
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__bg"></div>
+    <div class="header__inner">
+      <button class="header__btn header__btn--menu" type="button" aria-label="Меню">
+        <img src="assets/icons/menu.svg" alt="">
+      </button>
+      <a class="header__logo" href="index.html" aria-label="NewEra — главная">
+        <img src="assets/img/logo.png" alt="NewEra">
+      </a>
+      <button class="header__btn header__btn--cart" type="button" aria-label="Корзина">
+        <img src="assets/icons/cart.svg" alt="">
+        <span class="header__badge" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="product" data-product-page>
+      <a class="back-btn" href="index.html">
+        <img src="assets/img/back-button.png" alt="">
+        <span>Назад</span>
+      </a>
+
+      <div class="gallery">
+        <div class="gallery__main">
+          <img src="assets/img/biohazard-main.jpg" alt="">
+          <button class="gallery__next" type="button" aria-label="Следующее фото">
+            <img src="assets/icons/arrow-right.svg" alt="">
+          </button>
+        </div>
+        <div class="gallery__thumbs"></div>
+      </div>
+
+      <div class="info">
+        <h1 class="info__title"></h1>
+        <p class="info__price"></p>
+        <fieldset class="sizes" aria-label="Размер"></fieldset>
+        <button class="to-cart" type="button">В корзину</button>
+        <div class="info__desc"></div>
+      </div>
+    </section>
+
+    <h2 class="related-title">Смотрите также</h2>
+    <div class="grid grid--related" data-products></div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
