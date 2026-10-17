@@ -1,0 +1,48 @@
+import type { Product } from "@/types/product";
+
+export const products: Product[] = [
+    {
+        id: "biohazard",
+        slug: "biohazard",
+        name: "biohazard",
+        price: 3500,
+        status: "in-stock",
+        images: ["/img/biohazard-main.jpg", "biohazard-mini-1.jpg", "biohazard-mini-2.jpg"],
+        sizes: ["big", "overbig"],
+        description: ["..."],
+        vkUrl: "https://vk.com/",
+    },
+    {
+        id: "bomber",
+        slug: "bomber",
+        name: "bomber",
+        price: 7700,
+        status: "sold-out",
+        images: ["/img/bomber.jpg"],
+        sizes: [],
+        description: [],
+        vkUrl: "https://vk.com/",
+    },
+    {
+        id: "pants",
+        slug: "pants",
+        name: "pants",
+        price: 2800,
+        status: "few-left",
+        images: ["/img/pants.png"],
+        sizes: ["baby", "big", "overbig"],
+        description: [],
+        vkUrl: "https://vk.com/",
+    },
+    {
+        id: "shorts",
+        slug: "shorts",
+        name: "shorts",
+        price: 3000,
+        status: "in-stock",
+        images: ["/img/shorts.jpg"],
+        sizes: ["baby", "big", "overbig"],
+        description: [],
+        vkUrl: "https://vk.com/",
+    },
+];
