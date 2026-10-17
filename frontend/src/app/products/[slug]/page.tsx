@@ -15,9 +15,22 @@ export default async function ProductPage({ params }: ProductPageProps) {
     }
     return (
         <main>
-            <Image src={product.images[0]} alt={product.name} width={400} height={500}/>
+            {product.images.map((src) => (
+                <Image key={src} src={src} alt={product.name} width={400} height={500}/>
+            ))}
             <p>{product.name}</p>
-            <p>{product.price}₽</p>
+            <p>{product.price} ₽</p>
+            {product.sizes.map((size) => (
+                <button key={size}>{size}</button>
+            ))}
+            {product.description.map((line) => (
+                <p key={line}>{line}</p>
+            ))}
+            {product.status === "sold-out" ? (
+                <span>Нет в наличии</span>
+            ) : (
+                <a href={product.vkUrl} target="_blank" rel="noopener noreferrer">Купить в VK</a>
+            )}
         </main>
     )
 }
