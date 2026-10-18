@@ -15,12 +15,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
     }
     return (
         <main>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-4 max-w-5xl mx-auto">
                 <div> 
-                    <div className="relative aspect-[4/5]">
+                    <div className="relative aspect-[457/582]">
                         <Image src={product.images[0]} alt={product.name} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover"/>
                     </div>
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex gap-2 mt-2 max-w-[457px]">
                         {product.images.slice(1).map((src) => (
                             <Image key={src} src={src} alt={product.name} width={88} height={88} />
                         ))}
@@ -28,21 +28,21 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                 </div>
                 <div>
-                    <p>{product.name}</p>
-                    <p>{product.price} ₽</p>
-                    <div className="border px-4 py-2">
+                    <h1 className="text-4xl">{product.name}</h1>
+                    <h1 className="text-3xl mt-2">{product.price} ₽</h1>
+                    <div className="flex gap-2 mt-6" >
                         {product.sizes.map((size) => (
-                            <button key={size}>{size}</button>
+                            <button className="border border-red-bright px-4 py-2" key={size}>{size}</button>
                         ))}
                     </div>
                     {product.description.map((line) => (
-                        <p key={line}>{line}</p>
+                        <p className="text-sm mt-2" key={line}>{line}</p>
                     ))}
-                    <div className="inline-block border px-6 py-3">
+                    <div className="mt-6">
                         {product.status === "sold-out" ? (
-                            <span>Нет в наличии</span>
+                            <span className="text-grey">Нет в наличии</span>
                         ) : (
-                            <a href={product.vkUrl} target="_blank" rel="noopener noreferrer">Купить в VK</a>
+                            <a className="inline-block border border-red-bright text-red-text px-6 py-3 hover:bg-red-bright hover:text-white" href={product.vkUrl} target="_blank" rel="noopener noreferrer">Купить в VK</a>
                         )}
                     </div>
                 </div>
