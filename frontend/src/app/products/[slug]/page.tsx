@@ -1,7 +1,7 @@
 import { products } from "@/data/products"
 import { notFound } from "next/navigation"
 import { ProductGallery } from "@/components/product/ProductGallery"
-import { SizeSelector } from "@/components/product/SizeSelector"
+import { ProductPurchase } from "@/components/product/ProductPurchase"
 
 type ProductPageProps = {
     params: Promise<{ slug: string }>;
@@ -22,17 +22,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <div>
                     <h1 className="text-4xl">{product.name}</h1>
                     <p className="text-3xl mt-2">{product.price} ₽</p>
-                    <SizeSelector sizes={product.sizes} />
                     {product.description.map((line) => (
                         <p className="text-sm mt-2" key={line}>{line}</p>
                     ))}
-                    <div className="mt-6">
-                        {product.status === "sold-out" ? (
-                            <span className="text-grey">Нет в наличии</span>
-                        ) : (
-                            <a className="inline-block border border-red-bright text-red-text px-6 py-3 hover:bg-red-bright hover:text-white" href={product.vkUrl} target="_blank" rel="noopener noreferrer">Купить в VK</a>
-                        )}
-                    </div>
+                    <ProductPurchase product={product} />
                 </div>
             </div>
         </main>
