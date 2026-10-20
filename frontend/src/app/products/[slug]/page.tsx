@@ -1,6 +1,7 @@
 import { products } from "@/data/products"
 import { notFound } from "next/navigation"
 import { ProductGallery } from "@/components/product/ProductGallery"
+import { SizeSelector } from "@/components/product/SizeSelector"
 
 type ProductPageProps = {
     params: Promise<{ slug: string }>;
@@ -20,12 +21,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </div>
                 <div>
                     <h1 className="text-4xl">{product.name}</h1>
-                    <h1 className="text-3xl mt-2">{product.price} ₽</h1>
-                    <div className="flex gap-2 mt-6" >
-                        {product.sizes.map((size) => (
-                            <button className="border border-red-bright px-4 py-2" key={size}>{size}</button>
-                        ))}
-                    </div>
+                    <p className="text-3xl mt-2">{product.price} ₽</p>
+                    <SizeSelector sizes={product.sizes} />
                     {product.description.map((line) => (
                         <p className="text-sm mt-2" key={line}>{line}</p>
                     ))}
