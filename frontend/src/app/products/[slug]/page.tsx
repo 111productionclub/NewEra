@@ -1,7 +1,6 @@
 import { products } from "@/data/products"
-import Image from "next/image"
 import { notFound } from "next/navigation"
-
+import { ProductGallery } from "@/components/product/ProductGallery"
 
 type ProductPageProps = {
     params: Promise<{ slug: string }>;
@@ -17,15 +16,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <main>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-4 max-w-5xl mx-auto">
                 <div> 
-                    <div className="relative aspect-[457/582]">
-                        <Image src={product.images[0]} alt={product.name} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover"/>
-                    </div>
-                    <div className="flex gap-2 mt-2 max-w-[457px]">
-                        {product.images.slice(1).map((src) => (
-                            <Image key={src} src={src} alt={product.name} width={88} height={88} />
-                        ))}
-                    </div>
-
+                    <ProductGallery product={product} />
                 </div>
                 <div>
                     <h1 className="text-4xl">{product.name}</h1>
