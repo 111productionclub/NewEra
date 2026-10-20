@@ -24,7 +24,7 @@ export function ProductGallery({ product }: ProductGalleryProps) {
             {images.length > 1 && (
                 <div className="grid grid-cols-4 gap-2">
                     {images.map((imgUrl, idx) => (
-                    <button key={`${imgUrl}-${idx}`} onClick={() => setActiveSubIndex(idx)} className={`relative aspect-square overflow-hidden rounded-md bg-gray-100 border-2 transition-all ${ idx === activeSubIndex ? "border-blue-500 scale-95" : "border-transparent opacity-70 hover:opacity-100" }`}>
+                    <button key={`${imgUrl}-${idx}`} onClick={() => setActiveSubIndex(idx)} className={`relative aspect-square overflow-hidden rounded-md bg-gray-100 border-2 transition-all ${ idx === activeSubIndex ? "border-red-bright scale-95" : "border-transparent opacity-70 hover:opacity-100" }`}>
                         <Image src={imgUrl} alt={`${product.name || "Товар"} - миниатюра ${idx + 1}`} fill className="object-cover object-center" sizes="100px"/>
                     </button>
                     ))}
