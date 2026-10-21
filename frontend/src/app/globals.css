@@ -26,6 +26,7 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --font-text: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-main: "Lucida Handwriting", "Segoe Script", "Comic Sans MS", cursive;
   --font-alt: "Ink Free", "Segoe Print", "Lucida Handwriting", cursive;
 

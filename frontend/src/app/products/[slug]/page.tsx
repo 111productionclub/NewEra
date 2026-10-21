@@ -41,7 +41,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     <h1 className="text-sm leading-[19px] sm:text-[40px] sm:leading-[55px] text-stroke">{product.name}</h1>
                     <p className="mt-3 text-[15px] leading-[21px] sm:mt-2.5 sm:text-4xl sm:leading-[50px] text-stroke">{product.price} ₽</p>
                     <ProductPurchase product={product} />
-                    <div className="mt-[15px] sm:mt-[30px] max-w-[804px] text-[11px] leading-[17px] sm:text-xl sm:leading-7">
+                    <div className="mt-[15px] sm:mt-[30px] max-w-[804px] font-text not-italic tracking-normal text-[13px] leading-5 sm:text-lg sm:leading-7">
                         {product.description.map((line) => (
                             <p key={line}>{line}</p>
                         ))}
