@@ -9,24 +9,40 @@ type ProductGalleryProps = {
 };
 
 export function ProductGallery({ product }: ProductGalleryProps) {
-    const [activeSubIndex, setActiveSubIndex] = useState(0);
-    const images = product.images || [];
+    const [activeIndex, setActiveIndex] = useState(0);
+    const images = product.images;
 
     if (images.length === 0) {
-        return <div className="text-gray-500">Нет доступных изображений</div>;
+        return <div>Нет доступных изображений</div>;
     }
 
     return (
-        <div className="flex flex-col gap-4 w-full max-w-md">
-            <div className="relative aspect-[457/582] w-full overflow-hidden">
-                <Image src={images[activeSubIndex]} alt={product.name || "Изображение товара"} fill className="object-cover object-center" sizes="(max-width: 768px) 100vw, 450px" priority />
+        <div className="w-full">
+            <div className="relative aspect-[457/582] w-full overflow-hidden rounded-[11px] bg-[#111]">
+                <Image src={images[activeIndex]} alt={product.name} fill className="object-cover" sizes="(max-width: 640px) 283px, 457px" priority />
+                {images.length > 1 && (
+                    <button
+                        type="button"
+                        aria-label="Следующее фото"
+                        onClick={() => setActiveIndex((activeIndex + 1) % images.length)}
+                        className="absolute right-0 top-1/2 h-[39px] w-[39px] -translate-y-1/2 transition-transform hover:scale-105 sm:h-[69px] sm:w-[69px]"
+                    >
+                        <Image src="/icons/arrow-right.svg" alt="" width={69} height={69} />
+                    </button>
+                )}
             </div>
             {images.length > 1 && (
-                <div className="grid grid-cols-4 gap-2">
+                <div className="mt-1.5 flex gap-[5px] sm:mt-[21px] sm:gap-[9px]">
                     {images.map((imgUrl, idx) => (
-                    <button key={`${imgUrl}-${idx}`} onClick={() => setActiveSubIndex(idx)} className={`relative aspect-square overflow-hidden rounded-md bg-gray-100 border-2 transition-all ${ idx === activeSubIndex ? "border-red-bright scale-95" : "border-transparent opacity-70 hover:opacity-100" }`}>
-                        <Image src={imgUrl} alt={`${product.name || "Товар"} - миниатюра ${idx + 1}`} fill className="object-cover object-center" sizes="100px"/>
-                    </button>
+                        <button
+                            key={imgUrl}
+                            type="button"
+                            onClick={() => setActiveIndex(idx)}
+                            aria-label={`Фото ${idx + 1}`}
+                            className={`relative overflow-hidden rounded-[11px] h-[37px] w-[37px] sm:h-[88px] sm:w-[88px] outline-2 -outline-offset-2 transition-[outline-color] ${idx === activeIndex ? "outline-red-bright" : "outline-transparent"}`}
+                        >
+                            <Image src={imgUrl} alt="" fill className="object-cover" sizes="88px" />
+                        </button>
                     ))}
                 </div>
             )}

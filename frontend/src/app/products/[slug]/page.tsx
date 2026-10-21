@@ -27,24 +27,25 @@ export default async function ProductPage({ params }: ProductPageProps) {
     }
     return (
         <main>
-            <div className="p-4 mx-auto pb-0">
-                <Link href="/" className="inline-flex items-center gap-2">
-                    <Image src="/icons/back-button.png" alt="" width={48} height={48}></Image>
+            <section className="flex flex-col items-start px-4 pt-3 min-[1100px]:flex-row min-[1100px]:pt-[39px] min-[1100px]:pl-[6vw] min-[1100px]:pr-10 min-[1700px]:pl-[162px] pb-16">
+                <Link href="/" className="flex flex-none flex-col items-center w-[57px] h-[51px] pt-1 text-[8px] leading-3 sm:w-[102px] sm:h-[86px] sm:pt-[7px] rounded-[11px] sm:text-base sm:leading-[22px] border border-red-bright text-red-text transition-colors hover:bg-[#fff3f3]">
+                    <Image className="w-[37px] sm:w-[65px] h-auto" src="/icons/back-button.png" alt="" width={130} height={110} />
+                    <span className="sm:-mt-[5px]">Назад</span>
                 </Link>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-4 max-w-5xl mx-auto">
-                <div> 
+                <div className="mx-auto mt-5 w-full max-w-[283px] sm:max-w-[457px] min-[1100px]:mx-0 min-[1100px]:mt-0 min-[1100px]:ml-[6vw] min-[1100px]:flex-none min-[1700px]:ml-[168px]">
                     <ProductGallery product={product} />
                 </div>
-                <div>
-                    <h1 className="text-4xl">{product.name}</h1>
-                    <p className="text-3xl mt-2">{product.price} ₽</p>
-                    {product.description.map((line) => (
-                        <p className="text-sm mt-2" key={line}>{line}</p>
-                    ))}
+                <div className="mx-auto mt-5 w-full max-w-[313px] pl-3.5 sm:max-w-[457px] sm:pl-0 min-[1100px]:mx-0 min-[1100px]:mt-0 min-[1100px]:max-w-none min-[1100px]:ml-[4vw] min-[1100px]:min-w-0 min-[1100px]:flex-1 min-[1700px]:ml-[65px]">
+                    <h1 className="text-sm leading-[19px] sm:text-[40px] sm:leading-[55px] text-stroke">{product.name}</h1>
+                    <p className="mt-3 text-[15px] leading-[21px] sm:mt-2.5 sm:text-4xl sm:leading-[50px] text-stroke">{product.price} ₽</p>
                     <ProductPurchase product={product} />
+                    <div className="mt-[15px] sm:mt-[30px] max-w-[804px] text-[11px] leading-[17px] sm:text-xl sm:leading-7">
+                        {product.description.map((line) => (
+                            <p key={line}>{line}</p>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </section>
         </main>
     )
 }
