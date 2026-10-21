@@ -8,8 +8,10 @@ type ProductGridProps = {
 export function ProductGrid({ products }: ProductGridProps) {
     return (
         <div className="grid grid-cols-[repeat(2,minmax(0,363px))] lg:grid-cols-[repeat(4,minmax(0,363px))] justify-center gap-3 sm:gap-[3.5vw] 2xl:gap-[68px] px-2 sm:px-[41px] pt-5 pb-10 sm:pb-[60px]">
-            {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+            {products.map((product, index) => (
+                <div key={product.id} className="motion-safe:animate-fade-up" style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}>
+                    <ProductCard product={product} />
+                </div>
             ))}
         </div>
     );

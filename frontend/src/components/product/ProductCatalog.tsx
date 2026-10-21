@@ -48,7 +48,7 @@ export function ProductCatalog({ products }: ProductCatalogProps) {
                 </div>
             </div>
             {visible.length > 0 ? (
-                <ProductGrid products={visible} />
+                <ProductGrid key={active ?? "all"} products={visible} />
             ) : (
                 <p className="px-[13px] py-10 text-center text-sm sm:text-xl">Скоро здесь появятся новые вещи</p>
             )}

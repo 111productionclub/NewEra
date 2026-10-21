@@ -19,7 +19,7 @@ export function ProductGallery({ product }: ProductGalleryProps) {
     return (
         <div className="w-full">
             <div className="relative aspect-[457/582] w-full overflow-hidden rounded-[11px] bg-[#111]">
-                <Image src={images[activeIndex]} alt={product.name} fill className="object-cover" sizes="(max-width: 640px) 283px, 457px" priority />
+                <Image key={activeIndex} src={images[activeIndex]} alt={product.name} fill className="object-cover motion-safe:animate-fade-in" sizes="(max-width: 640px) 283px, 457px" priority />
                 {images.length > 1 && (
                     <button
                         type="button"
