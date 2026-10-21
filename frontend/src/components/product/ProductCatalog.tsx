@@ -28,7 +28,7 @@ export function ProductCatalog({ products }: ProductCatalogProps) {
                     className="inline-flex items-center gap-1.5 text-[13px] leading-[18px] sm:text-xl sm:leading-7 text-stroke transition-opacity hover:opacity-75"
                 >
                     Каталог{active && ` · ${CATEGORY_LABELS[active]}`}
-                    <svg className={`h-3 w-[9px] sm:h-4 sm:w-3 transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`} viewBox="0 0 12 16" fill="none" aria-hidden="true">
+                    <svg className={`h-3 w-[9px] sm:h-4 sm:w-3 transition-transform duration-300 ${isOpen ? "" : "rotate-180"}`} viewBox="0 0 12 16" fill="none" aria-hidden="true">
                         <path d="M6 0v15M1 10l5 5 5-5" stroke="currentColor" strokeWidth="1.5" />
                     </svg>
                 </button>
