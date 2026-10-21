@@ -1,0 +1,11 @@
+# Добавить в конец ~/sleng-django/Caddyfile (Caddy проекта sleng).
+# Сертификат Caddy выпустит сам, когда DNS домена будет указывать на сервер.
+
+newerastore.ru {
+    encode zstd gzip
+    reverse_proxy newera-web:80
+}
+
+www.newerastore.ru {
+    redir https://newerastore.ru{uri} permanent
+}
