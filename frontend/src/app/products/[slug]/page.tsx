@@ -1,5 +1,7 @@
 import { products } from "@/data/products"
 import { notFound } from "next/navigation"
+import Link from "next/link"
+import Image from "next/image"
 import { ProductGallery } from "@/components/product/ProductGallery"
 import { ProductPurchase } from "@/components/product/ProductPurchase"
 
@@ -25,6 +27,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
     }
     return (
         <main>
+            <div className="p-4 mx-auto pb-0">
+                <Link href="/" className="inline-flex items-center gap-2">
+                    <Image src="/icons/back-button.png" alt="" width={48} height={48}></Image>
+                </Link>
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-4 max-w-5xl mx-auto">
                 <div> 
                     <ProductGallery product={product} />
