@@ -34,7 +34,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     <Image className="w-[37px] sm:w-[65px] h-auto" src="/icons/back-button.png" alt="" width={130} height={110} />
                     <span className="sm:-mt-[5px]">Назад</span>
                 </Link>
-                <div className="mx-auto mt-5 w-full max-w-[283px] sm:mx-0 sm:mt-0 sm:ml-[6vw] sm:w-auto sm:max-w-none sm:flex-[0_1_457px] lg:flex-none 2xl:ml-[168px]">
+                <div className="mx-auto mt-5 w-full max-w-[283px] sm:mx-0 sm:mt-0 sm:ml-[6vw] sm:w-auto sm:max-w-none sm:flex-[0_1_457px] lg:w-[457px] lg:flex-none 2xl:ml-[168px]">
                     <ProductGallery product={product} />
                 </div>
                 <div className="mx-auto mt-5 w-full max-w-[313px] pl-3.5 sm:mx-0 sm:mt-10 sm:ml-[calc(102px+6vw)] sm:w-auto sm:max-w-none sm:basis-full sm:pl-0 lg:mt-0 lg:ml-[4vw] lg:min-w-0 lg:flex-1 2xl:ml-[65px]">
