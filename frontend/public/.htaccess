@@ -1,0 +1,9 @@
+# Для хостинга на Apache. Если у вас nginx, этот файл не нужен: см. DEPLOY.md
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+# /about -> /about.html, /products/biohazard -> /products/biohazard.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
