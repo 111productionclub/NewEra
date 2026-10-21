@@ -10,7 +10,6 @@
   --color-foreground: var(--foreground);
   --font-main: "Lucida Handwriting", "Segoe Script", "Comic Sans MS", cursive;
   --font-alt: "Ink Free", "Segoe Print", "Lucida Handwriting", cursive;
-  --font-pixel: var(--font-pixelify), var(--font-main);
 
   --color-red: #880000;
   --color-red-bright: #d21115;
