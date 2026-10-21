@@ -29,15 +29,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
     const related = products.filter((p) => p.id !== product.id);
     return (
         <main>
-            <section className="flex flex-col items-start px-4 pt-3 sm:flex-row sm:flex-wrap sm:px-[6vw] sm:pt-[39px] min-[1100px]:flex-nowrap min-[1100px]:pr-10 min-[1700px]:pl-[162px] pb-5">
+            <section className="flex flex-col items-start px-4 pt-3 sm:flex-row sm:flex-wrap sm:px-[6vw] sm:pt-[39px] lg:flex-nowrap lg:pr-10 2xl:pl-[162px] pb-5">
                 <Link href="/" className="flex flex-none flex-col items-center w-[57px] h-[51px] pt-1 text-[8px] leading-3 sm:w-[102px] sm:h-[86px] sm:pt-[7px] rounded-[11px] sm:text-base sm:leading-[22px] border border-red-bright text-red-text transition-colors hover:bg-[#fff3f3]">
                     <Image className="w-[37px] sm:w-[65px] h-auto" src="/icons/back-button.png" alt="" width={130} height={110} />
                     <span className="sm:-mt-[5px]">Назад</span>
                 </Link>
-                <div className="mx-auto mt-5 w-full max-w-[283px] sm:mx-0 sm:mt-0 sm:ml-[6vw] sm:w-auto sm:max-w-none sm:flex-[0_1_457px] min-[1100px]:flex-none min-[1700px]:ml-[168px]">
+                <div className="mx-auto mt-5 w-full max-w-[283px] sm:mx-0 sm:mt-0 sm:ml-[6vw] sm:w-auto sm:max-w-none sm:flex-[0_1_457px] lg:flex-none 2xl:ml-[168px]">
                     <ProductGallery product={product} />
                 </div>
-                <div className="mx-auto mt-5 w-full max-w-[313px] pl-3.5 sm:mx-0 sm:mt-10 sm:ml-[calc(102px+6vw)] sm:w-auto sm:max-w-none sm:basis-full sm:pl-0 min-[1100px]:mt-0 min-[1100px]:ml-[4vw] min-[1100px]:min-w-0 min-[1100px]:flex-1 min-[1700px]:ml-[65px]">
+                <div className="mx-auto mt-5 w-full max-w-[313px] pl-3.5 sm:mx-0 sm:mt-10 sm:ml-[calc(102px+6vw)] sm:w-auto sm:max-w-none sm:basis-full sm:pl-0 lg:mt-0 lg:ml-[4vw] lg:min-w-0 lg:flex-1 2xl:ml-[65px]">
                     <h1 className="text-sm leading-[19px] sm:text-[40px] sm:leading-[55px] text-stroke">{product.name}</h1>
                     <p className="mt-3 text-[15px] leading-[21px] sm:mt-2.5 sm:text-4xl sm:leading-[50px] text-stroke">{product.price} ₽</p>
                     <ProductPurchase product={product} />
@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     </div>
                 </div>
             </section>
-            <h2 className="mt-5 ml-3 text-[11px] leading-[15px] sm:mt-[37px] sm:ml-[6vw] sm:text-base sm:leading-[22px] min-[1700px]:ml-[148px]">Смотрите также</h2>
+            <h2 className="mt-5 ml-3 text-[11px] leading-[15px] sm:mt-[37px] sm:ml-[6vw] sm:text-base sm:leading-[22px] 2xl:ml-[148px]">Смотрите также</h2>
             <ProductGrid products={related} />
         </main>
     )
