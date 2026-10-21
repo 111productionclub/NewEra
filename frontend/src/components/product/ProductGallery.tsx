@@ -18,7 +18,7 @@ export function ProductGallery({ product }: ProductGalleryProps) {
 
     return (
         <div className="w-full">
-            <div className="relative aspect-[457/582] w-full overflow-hidden rounded-[11px] bg-[#111]">
+            <div className="relative aspect-[457/582] w-full overflow-hidden rounded-[11px] bg-grey">
                 <Image key={activeIndex} src={images[activeIndex]} alt={product.name} fill className="object-cover motion-safe:animate-fade-in" sizes="(max-width: 640px) 283px, 457px" priority />
                 {images.length > 1 && (
                     <button
@@ -39,7 +39,7 @@ export function ProductGallery({ product }: ProductGalleryProps) {
                             type="button"
                             onClick={() => setActiveIndex(idx)}
                             aria-label={`Фото ${idx + 1}`}
-                            className={`relative overflow-hidden rounded-[11px] h-[37px] w-[37px] sm:h-[88px] sm:w-[88px] outline-2 -outline-offset-2 transition-[outline-color] ${idx === activeIndex ? "outline-red-bright" : "outline-transparent"}`}
+                            className={`relative overflow-hidden rounded-[11px] bg-grey h-[37px] w-[37px] sm:h-[88px] sm:w-[88px] outline-2 -outline-offset-2 transition-[outline-color] ${idx === activeIndex ? "outline-red-bright" : "outline-transparent"}`}
                         >
                             <Image src={imgUrl} alt="" fill className="object-cover" sizes="88px" />
                         </button>
