@@ -26,7 +26,7 @@ export function ProductPurchase({ product }: ProductPurchaseProps) {
         onSelect={setSelected}
       />
       {product.status === "sold-out" ? (
-        <span className="text-grey">Нет в наличии</span>
+        <span>Нет в наличии</span>
       ) : (
         <button
           className="disabled:opacity-50 disabled:cursor-not-allowed border border-red-bright text-red-text px-6 py-3 hover:bg-red-bright hover:text-white mt-6"
