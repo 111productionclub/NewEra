@@ -1,0 +1,40 @@
+# Сайт NewEra: Django-бэкенд + nginx со статикой сайта.
+# Подключается к сети проекта sleng, где уже работает Caddy (он выдаёт HTTPS и проксирует на newera-web).
+name: newera
+
+services:
+  newera-backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DJANGO_DEBUG: "0"
+      DJANGO_DB_PATH: /data/db.sqlite3
+    volumes:
+      - data:/data
+      - media_data:/app/media
+      - static_data:/app/staticfiles
+    networks: [internal]
+
+  newera-web:
+    image: nginx:1.27-alpine
+    container_name: newera-web
+    restart: unless-stopped
+    depends_on: [newera-backend]
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./site:/usr/share/nginx/html:ro
+      - media_data:/srv/media:ro
+      - static_data:/srv/static:ro
+    networks: [internal, sleng]
+
+volumes:
+  data:
+  media_data:
+  static_data:
+
+networks:
+  internal:
+  sleng:
+    name: sleng_vebsite-main_default
+    external: true
