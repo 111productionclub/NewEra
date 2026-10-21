@@ -31,8 +31,6 @@ rsync -av --delete --exclude .venv --exclude db.sqlite3 --exclude media --exclud
 rsync -av -e "ssh -p SSH_PORT" deploy/docker-compose.yml deploy/nginx.conf deploy/.env.example SERVER_USER@SERVER_IP:~/newera/
 ```
 
-Скрытый `.htaccess` из `out/` на сервере не нужен (там nginx), он просто полежит.
-
 ## 2. Настроить и запустить (на сервере)
 
 ```bash
