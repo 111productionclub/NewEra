@@ -33,7 +33,7 @@ export function ProductPurchase({ product }: ProductPurchaseProps) {
       ) : (
         <div className="mt-3.5 sm:mt-[35px] flex flex-wrap items-center gap-3 sm:gap-5">
         <button
-          className="h-[29px] sm:h-[46px] px-[9px] sm:px-[13px] rounded-[11px] border border-black bg-red text-white text-xs sm:text-2xl text-stroke transition active:scale-95 hover:brightness-125 disabled:bg-[#777] disabled:cursor-not-allowed disabled:hover:brightness-100"
+          className="h-9 sm:h-[46px] px-3 sm:px-[13px] rounded-[11px] border border-black bg-red text-white text-sm sm:text-2xl text-stroke transition active:scale-95 hover:brightness-125 disabled:bg-[#777] disabled:cursor-not-allowed disabled:hover:brightness-100"
           type="button"
           disabled={selected === null}
           onClick={handleBuy}
@@ -41,7 +41,7 @@ export function ProductPurchase({ product }: ProductPurchaseProps) {
           {copied ? "Текст скопирован ✓" : "Купить в VK"}
         </button>
         {selected === null && (
-          <span className="text-xs sm:text-lg text-red-text motion-safe:animate-fade-in">← выберите размер</span>
+          <span className="text-sm sm:text-lg text-red-text motion-safe:animate-fade-in">← выберите размер</span>
         )}
         </div>
       )}

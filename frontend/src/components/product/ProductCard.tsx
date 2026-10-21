@@ -13,14 +13,15 @@ const STATUS_LABELS: Record<Product["status"], string> = {
 };
 
 export function ProductCard({ product }: ProductCardProps) {
+    const soldOut = product.status === "sold-out";
     return (
-        <Link className="group @container relative block aspect-[363/462] overflow-hidden rounded-[11px] bg-grey not-italic text-white transition-transform duration-200 hover:-translate-y-1" href={`/products/${product.slug}`}>
-            <Image className="object-cover transition-transform duration-500 group-hover:scale-105" src={product.images[0]} alt={product.name} fill sizes="(min-width:1100px) 25vw, 50vw"/>
+        <Link className={`group @container relative block aspect-[363/462] overflow-hidden rounded-[11px] bg-grey not-italic text-white transition-transform duration-200 ${soldOut ? "" : "hover:-translate-y-1"}`} href={`/products/${product.slug}`}>
+            <Image className={`object-cover transition duration-500 ${soldOut ? "opacity-60 grayscale" : "group-hover:scale-105"}`} src={product.images[0]} alt={product.name} fill sizes="(min-width:1100px) 25vw, 50vw"/>
             <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/60 to-transparent" />
-            <p className="absolute top-[4.5%] right-[6%] w-min text-center leading-tight text-stroke text-[clamp(11px,6.6cqw,24px)]">
+            <p className="absolute top-[4.5%] right-[6%] w-min text-center leading-tight text-stroke text-[clamp(12px,6.6cqw,24px)]">
                 {STATUS_LABELS[product.status]}
             </p>
-            <div className="absolute inset-x-0 bottom-[3%] text-center text-stroke text-[clamp(11px,6.6cqw,24px)] leading-snug">
+            <div className="absolute inset-x-0 bottom-[3%] text-center text-stroke text-[clamp(12px,6.6cqw,24px)] leading-snug">
                 <p className="whitespace-nowrap">{product.name}</p>
                 <p className="whitespace-nowrap mt-[0.55em]">{product.price}₽</p>
             </div>

@@ -25,7 +25,7 @@ export function ProductCatalog({ products }: ProductCatalogProps) {
                     type="button"
                     aria-expanded={isOpen}
                     onClick={() => setIsOpen(!isOpen)}
-                    className="inline-flex items-center gap-1.5 text-[13px] leading-[18px] sm:text-xl sm:leading-7 text-stroke transition-opacity hover:opacity-75"
+                    className="inline-flex items-center gap-1.5 text-[15px] leading-5 sm:text-xl sm:leading-7 text-stroke transition-opacity hover:opacity-75"
                 >
                     Каталог{active && ` · ${CATEGORY_LABELS[active]}`}
                     <svg className={`h-3 w-[9px] sm:h-4 sm:w-3 transition-transform duration-300 ${isOpen ? "" : "rotate-180"}`} viewBox="0 0 12 16" fill="none" aria-hidden="true">

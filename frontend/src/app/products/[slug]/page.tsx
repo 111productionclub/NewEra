@@ -30,8 +30,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     return (
         <main>
             <section className="flex flex-col items-start px-4 pt-3 sm:flex-row sm:flex-wrap sm:px-[6vw] sm:pt-[39px] lg:flex-nowrap lg:pr-10 2xl:pl-[162px] pb-5">
-                <Link href="/" className="flex flex-none flex-col items-center w-[57px] h-[51px] pt-1 text-[8px] leading-3 sm:w-[102px] sm:h-[86px] sm:pt-[7px] rounded-[11px] sm:text-base sm:leading-[22px] border border-red-bright text-red-text transition-colors hover:bg-[#fff3f3]">
-                    <Image className="w-[37px] sm:w-[65px] h-auto" src="/icons/back-button.png" alt="" width={130} height={110} />
+                <Link href="/" className="flex flex-none flex-col items-center w-[64px] h-[58px] pt-1 text-[11px] leading-[14px] sm:w-[102px] sm:h-[86px] sm:pt-[7px] rounded-[11px] sm:text-base sm:leading-[22px] border border-red-bright text-red-text transition-colors hover:bg-[#fff3f3]">
+                    <Image className="w-[42px] sm:w-[65px] h-auto" src="/icons/back-button.png" alt="" width={130} height={110} />
                     <span className="sm:-mt-[5px]">Назад</span>
                 </Link>
                 <div className="mx-auto mt-5 w-full max-w-[283px] sm:mx-0 sm:mt-0 sm:ml-[6vw] sm:w-auto sm:max-w-none sm:flex-[0_1_457px] lg:w-[457px] lg:flex-none 2xl:ml-[168px]">
@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     </div>
                 </div>
             </section>
-            <h2 className="mt-5 ml-3 text-[11px] leading-[15px] sm:mt-[37px] sm:ml-[6vw] sm:text-base sm:leading-[22px] 2xl:ml-[148px]">Смотрите также</h2>
+            <h2 className="mt-5 ml-3 text-[13px] leading-[18px] sm:mt-[37px] sm:ml-[6vw] sm:text-base sm:leading-[22px] 2xl:ml-[148px]">Смотрите также</h2>
             <ProductGrid products={related} />
         </main>
     )
