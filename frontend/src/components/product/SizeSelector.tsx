@@ -16,7 +16,7 @@ export function SizeSelector({ sizes, selected, onSelect }: SizeSelectorProps) {
                     type="button"
                     onClick={() => onSelect(size)}
                     aria-pressed={size === selected}
-                    className={`h-[29px] sm:h-[58px] px-1.5 sm:px-7 rounded-[11px] border border-black text-sm sm:text-2xl text-stroke transition-colors ${size === selected ? "bg-black text-white" : "bg-white hover:bg-[#f1f1f1]"}`}
+                    className={`h-9 sm:h-[58px] px-3 sm:px-7 rounded-[11px] border border-black text-sm sm:text-2xl text-stroke transition-colors ${size === selected ? "bg-black text-white" : "bg-white hover:bg-[#f1f1f1]"}`}
                 >
                     {size}
                 </button>
