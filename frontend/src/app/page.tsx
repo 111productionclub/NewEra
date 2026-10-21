@@ -1,10 +1,10 @@
-import { ProductGrid } from "@/components/product/ProductGrid";
+import { ProductCatalog } from "@/components/product/ProductCatalog";
 import { products } from "@/data/products"
 
 export default function Home() {
   return (
     <main>
-      <ProductGrid products={products} />
+      <ProductCatalog products={products} />
     </main>
   );
 }

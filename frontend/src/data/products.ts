@@ -4,6 +4,7 @@ export const products: Product[] = [
     {
         id: "biohazard",
         slug: "biohazard",
+        category: "top",
         name: '"BIOHAZARD" t-shirt',
         price: 3500,
         status: "in-stock",
@@ -17,6 +18,7 @@ export const products: Product[] = [
     {
         id: "bomber",
         slug: "bomber",
+        category: "top",
         name: "«kill racing» bomber",
         price: 7700,
         status: "sold-out",
@@ -28,6 +30,7 @@ export const products: Product[] = [
     {
         id: "pants",
         slug: "pants",
+        category: "bottom",
         name: "pants «shadow»",
         price: 2800,
         status: "few-left",
@@ -39,6 +42,7 @@ export const products: Product[] = [
     {
         id: "shorts",
         slug: "shorts",
+        category: "bottom",
         name: "shorts «glow»",
         price: 3000,
         status: "in-stock",
