@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(help_text='Латиницей, без пробелов. Это часть ссылки: /products/<адрес>. После публикации лучше не менять.', unique=True, verbose_name='Адрес страницы')),
                 ('name', models.CharField(max_length=200, verbose_name='Название')),
                 ('price', models.PositiveIntegerField(verbose_name='Цена, ₽')),
-                ('category', models.CharField(choices=[('top', 'Верхняя одежда'), ('bottom', 'Нижняя одежда'), ('accessories', 'Аксессуары')], max_length=20, verbose_name='Категория')),
+                ('category', models.CharField(choices=[('top', 'Верхняя одежда'), ('bottom', 'Низ'), ('accessories', 'Аксессуары')], max_length=20, verbose_name='Категория')),
                 ('status', models.CharField(choices=[('in-stock', 'В наличии'), ('few-left', 'Мало осталось'), ('sold-out', 'Нет в наличии')], default='in-stock', max_length=20, verbose_name='Наличие')),
                 ('sizes', models.CharField(blank=True, help_text='Через запятую, например: baby, big, overbig. Пусто, если размеров нет.', max_length=200, verbose_name='Размеры')),
                 ('description', models.TextField(blank=True, help_text='Каждая строка станет отдельной строчкой на странице товара.', verbose_name='Описание')),
