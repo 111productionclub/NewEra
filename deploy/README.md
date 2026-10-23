@@ -3,7 +3,7 @@
 Схема: на сервере уже работает Caddy проекта sleng (контейнер `sleng-caddy`, порты 80/443, сеть `sleng_vebsite-main_default`). Мы добавляем свой проект `newera` из двух контейнеров и один блок в Caddyfile.
 
 ```
-newerastore.ru -> sleng-caddy (HTTPS) -> newera-web (nginx)
+mynewerastore.ru -> sleng-caddy (HTTPS) -> newera-web (nginx)
                                           ├── / ...................... статический сайт (frontend/out)
                                           ├── /admin/, /api/ ......... newera-backend (Django + gunicorn)
                                           ├── /media/ ................ загруженные фото
@@ -16,7 +16,7 @@ newerastore.ru -> sleng-caddy (HTTPS) -> newera-web (nginx)
 
 ## 0. Один раз у регистратора домена
 
-Создайте записи A для `newerastore.ru` и `www.newerastore.ru` на IP сервера. Пока DNS не обновился, Caddy не выдаст сертификат. Проверка: `dig +short newerastore.ru`.
+Создайте записи A для `mynewerastore.ru` и `www.mynewerastore.ru` на IP сервера. Пока DNS не обновился, Caddy не выдаст сертификат. Проверка: `dig +short mynewerastore.ru`.
 
 ## 1. Собрать сайт и отправить файлы (на вашем компьютере)
 
@@ -53,13 +53,13 @@ cd ~/sleng-django
 cp Caddyfile Caddyfile.bak.$(date +%F)
 cat >> Caddyfile <<'BLOCK'
 
-newerastore.ru {
+mynewerastore.ru {
     encode zstd gzip
     reverse_proxy newera-web:80
 }
 
-www.newerastore.ru {
-    redir https://newerastore.ru{uri} permanent
+www.mynewerastore.ru {
+    redir https://mynewerastore.ru{uri} permanent
 }
 BLOCK
 
@@ -73,8 +73,8 @@ sudo docker exec sleng-caddy caddy reload   --config /etc/caddy/Caddyfile   # п
 
 ## 4. Проверка
 
-1. До обновления DNS можно проверить через IP: `curl -k --resolve newerastore.ru:443:127.0.0.1 https://newerastore.ru/api/products/` (на сервере).
-2. После обновления DNS: сайт `https://newerastore.ru/`, админка `https://newerastore.ru/admin/`, несуществующий адрес `/abc` показывает 404.
+1. До обновления DNS можно проверить через IP: `curl -k --resolve mynewerastore.ru:443:127.0.0.1 https://mynewerastore.ru/api/products/` (на сервере).
+2. После обновления DNS: сайт `https://mynewerastore.ru/`, админка `https://mynewerastore.ru/admin/`, несуществующий адрес `/abc` показывает 404.
 3. В админке добавьте товар с фото, фото должно открываться по `/media/...`.
 
 ## Обновления
