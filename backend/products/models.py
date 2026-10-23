@@ -5,7 +5,7 @@ from django.db import models
 class Product(models.Model):
     class Category(models.TextChoices):
         TOP = "top", "Верхняя одежда"
-        BOTTOM = "bottom", "Нижняя одежда"
+        BOTTOM = "bottom", "Низ"
         ACCESSORIES = "accessories", "Аксессуары"
 
     class Status(models.TextChoices):
