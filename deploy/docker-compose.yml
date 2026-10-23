@@ -26,7 +26,7 @@ services:
       - ./site:/usr/share/nginx/html:ro
       - media_data:/srv/media:ro
       - static_data:/srv/static:ro
-    networks: [internal, sleng]
+    networks: [internal, web]
 
 volumes:
   data:
@@ -35,6 +35,5 @@ volumes:
 
 networks:
   internal:
-  sleng:
-    name: sleng_vebsite-main_default
+  web:
     external: true

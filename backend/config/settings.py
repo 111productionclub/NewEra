@@ -17,7 +17,7 @@ ALLOWED_HOSTS = [h for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,12
 
 # Адреса сайта, которым разрешено читать API из браузера
 CORS_ALLOWED_ORIGINS = [
-    o for o in os.environ.get("CORS_ALLOWED_ORIGINS", "http://localhost:3000,https://newerastore.ru").split(",") if o
+    o for o in os.environ.get("CORS_ALLOWED_ORIGINS", "http://localhost:3000,https://mynewerastore.ru").split(",") if o
 ]
 CSRF_TRUSTED_ORIGINS = [o for o in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if o]
 
