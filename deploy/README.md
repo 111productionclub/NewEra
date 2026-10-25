@@ -79,8 +79,15 @@ sudo docker exec sleng-caddy caddy reload   --config /etc/caddy/Caddyfile   # п
 
 ## Обновления
 
-- Новая версия сайта: шаг 1 (`pnpm build` и `rsync` в `site/`), перезапуск не нужен.
-- Новая версия бэкенда: `rsync` backend, затем `sudo docker compose up -d --build`.
+Сервер работает из git-клона в `~/newera`. Сайт статический: товары из админки попадают на него только при сборке (решение D-20).
+
+- Поменяли товары в админке: `bash ~/newera/deploy/rebuild-site.sh`.
+- Новая версия кода сайта: `cd ~/newera && git pull`, затем `bash deploy/rebuild-site.sh`.
+- Новая версия бэкенда: `git pull`, затем `cd deploy && sudo docker compose up -d --build`.
+
+`rebuild-site.sh` собирает сайт в контейнере `node:22-alpine` внутри сети Docker, берёт товары из `http://newera-backend:8000/api/products/`, кладёт результат в `frontend/out` и перезапускает nginx. В конце печатает число собранных страниц товаров: оно должно совпадать с числом опубликованных товаров.
+
+`git status` на сервере должен быть чистым. Правки прямо на сервере мешают `git pull` и теряются, все изменения идут через ветку и PR.
 
 ## Резервные копии
 
