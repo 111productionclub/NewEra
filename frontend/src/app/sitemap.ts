@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next"
-import { products } from "@/data/products"
+import { getProducts } from "@/data/getProducts"
 import { SITE_URL } from "@/config/site"
 
 export const dynamic = "force-static"
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const products = await getProducts();
     return [
         { url: SITE_URL },
         { url: `${SITE_URL}/about` },

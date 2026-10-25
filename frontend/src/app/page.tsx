@@ -1,7 +1,8 @@
 import { ProductCatalog } from "@/components/product/ProductCatalog";
-import { products } from "@/data/products"
+import { getProducts } from "@/data/getProducts"
 
-export default function Home() {
+export default async function Home() {
+  const products = await getProducts();
   return (
     <main>
       <ProductCatalog products={products} />

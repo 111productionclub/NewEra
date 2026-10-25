@@ -1,4 +1,4 @@
-import { products } from "@/data/products"
+import { getProducts } from "@/data/getProducts"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
@@ -13,6 +13,7 @@ type ProductPageProps = {
 
 export async function  generateMetadata({ params }: ProductPageProps) {
     const { slug } = await params;
+    const products = await getProducts();
     const product = products.find((p) => p.slug === slug);
     if (!product) return {};
     return { title: `${product.name} | new era`, description: product.description[0] };
@@ -22,6 +23,7 @@ export async function  generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
     const { slug } = await params;
+    const products = await getProducts();
     const product = products.find((p) => p.slug === slug);
     if (!product) {
         notFound();
@@ -31,7 +33,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <main>
             <section className="flex flex-col items-start px-4 pt-3 sm:flex-row sm:flex-wrap sm:px-[6vw] sm:pt-[39px] lg:flex-nowrap lg:pr-10 2xl:pl-[162px] pb-5">
                 <Link href="/" className="flex flex-none flex-col items-center w-[64px] h-[58px] pt-1 text-[11px] leading-[14px] sm:w-[102px] sm:h-[86px] sm:pt-[7px] rounded-[11px] sm:text-base sm:leading-[22px] border border-red-bright text-red-text transition-colors hover:bg-[#fff3f3]">
-                    <Image className="w-[42px] sm:w-[65px] h-auto" src="/icons/back-button.png" alt="" width={130} height={110} />
+                    {/* У PNG белый непрозрачный фон: multiply делает белое прозрачным, и при наведении крестик подсвечивается вместе с кнопкой */}
+                    <Image className="w-[42px] sm:w-[65px] h-auto mix-blend-multiply" src="/icons/back-button.png" alt="" width={130} height={110} />
                     <span className="sm:-mt-[5px]">Назад</span>
                 </Link>
                 <div className="mx-auto mt-5 w-full max-w-[283px] sm:mx-0 sm:mt-0 sm:ml-[6vw] sm:w-auto sm:max-w-none sm:flex-[0_1_457px] lg:w-[457px] lg:flex-none 2xl:ml-[168px]">
@@ -54,6 +57,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     )
 }
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+    const products = await getProducts();
     return products.map((p) => ({ slug: p.slug }));
 }
