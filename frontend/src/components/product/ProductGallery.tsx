@@ -86,11 +86,11 @@ export function ProductGallery({ product }: ProductGalleryProps) {
     return (
         <div className="w-full">
             <div
-                className="relative aspect-[457/582] w-full overflow-hidden rounded-[11px] bg-grey"
+                className="relative aspect-[600/582] w-full overflow-hidden rounded-[11px] bg-grey"
                 onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
                 onTouchEnd={handleTouchEnd}
             >
-                <button type="button" aria-label="Открыть фото на весь экран" onClick={openViewer} className="absolute inset-0 cursor-zoom-in">
+                <button type="button" aria-label="Открыть фото на весь экран" onClick={openViewer} className="absolute inset-0 block h-full w-full cursor-zoom-in">
                     <Image key={activeIndex} src={images[activeIndex]} alt={product.name} fill className="object-cover motion-safe:animate-fade-in" sizes="(max-width: 640px) 283px, 457px" priority />
                 </button>
                 {count > 1 && <ArrowButton direction="prev" onClick={() => go(-1)} className="left-0 h-11 w-11 sm:h-[69px] sm:w-[69px]" />}
