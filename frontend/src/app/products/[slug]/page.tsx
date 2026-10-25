@@ -1,4 +1,4 @@
-import { products } from "@/data/products"
+import { getProducts } from "@/data/getProducts"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
@@ -13,6 +13,7 @@ type ProductPageProps = {
 
 export async function  generateMetadata({ params }: ProductPageProps) {
     const { slug } = await params;
+    const products = await getProducts();
     const product = products.find((p) => p.slug === slug);
     if (!product) return {};
     return { title: `${product.name} | new era`, description: product.description[0] };
@@ -22,6 +23,7 @@ export async function  generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
     const { slug } = await params;
+    const products = await getProducts();
     const product = products.find((p) => p.slug === slug);
     if (!product) {
         notFound();
@@ -55,6 +57,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     )
 }
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+    const products = await getProducts();
     return products.map((p) => ({ slug: p.slug }));
 }

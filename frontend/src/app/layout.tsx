@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { SITE_URL } from "@/config/site"
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="flex-1">{children}</div>
         <Footer />
       </body>
+      {process.env.NODE_ENV === "production" && <GoogleAnalytics gaId="G-MR1HSJRX0P" />}
     </html>
   );
 }
