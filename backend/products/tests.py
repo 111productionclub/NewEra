@@ -1,13 +1,16 @@
 import io
+import os
 import shutil
 import tempfile
 
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.management import call_command
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from PIL import Image
 
+from .images import SIZES, has_variants, variant_name
 from .models import Product, ProductImage
 
 TMP_MEDIA = tempfile.mkdtemp()
@@ -79,3 +82,72 @@ class ProductApiTests(TestCase):
         self.product.refresh_from_db()
         self.assertEqual((self.product.name, self.product.price, self.product.status), ("Tee 2", 4100, "few-left"))
         self.assertEqual(self.product.images.count(), 3)
+
+
+def make_photo(size, mode="RGB", fmt="JPEG", name="big.jpg", exif_orientation=None):
+    buffer = io.BytesIO()
+    image = Image.new(mode, size, (200, 30, 30, 128) if mode == "RGBA" else "red")
+    kwargs = {}
+    if exif_orientation:
+        exif = Image.Exif()
+        exif[0x0112] = exif_orientation
+        kwargs["exif"] = exif
+    image.save(buffer, fmt, **kwargs)
+    return SimpleUploadedFile(name, buffer.getvalue())
+
+
+@override_settings(MEDIA_ROOT=TMP_MEDIA)
+class ProductImageVariantsTests(TestCase):
+    def setUp(self):
+        self.product = Product.objects.create(slug="hoodie", name="Hoodie", price=5000, category="top")
+
+    def open_variant(self, photo, size):
+        return Image.open(photo.image.storage.path(variant_name(photo.image.name, size)))
+
+    def test_upload_creates_three_webp_sizes(self):
+        photo = ProductImage.objects.create(product=self.product, image=make_photo((4000, 3000)))
+        for size in SIZES:
+            with self.open_variant(photo, size) as variant:
+                self.assertEqual(variant.format, "WEBP")
+                self.assertEqual(variant.size, (size, size * 3 // 4))
+
+    def test_small_photo_is_not_upscaled(self):
+        photo = ProductImage.objects.create(product=self.product, image=make_photo((500, 300)))
+        with self.open_variant(photo, 1600) as variant:
+            self.assertEqual(variant.size, (500, 300))
+
+    def test_phone_rotation_from_exif_is_applied(self):
+        # Orientation 6: снято боком, картинку надо повернуть на 90°
+        photo = ProductImage.objects.create(product=self.product, image=make_photo((2000, 1000), exif_orientation=6))
+        with self.open_variant(photo, 1600) as variant:
+            self.assertEqual(variant.size, (800, 1600))
+
+    def test_transparent_png_keeps_transparency(self):
+        upload = make_photo((900, 900), mode="RGBA", fmt="PNG", name="logo.png")
+        photo = ProductImage.objects.create(product=self.product, image=upload)
+        with self.open_variant(photo, 800) as variant:
+            self.assertEqual(variant.mode, "RGBA")
+
+    def test_changing_order_does_not_recompress(self):
+        photo = ProductImage.objects.create(product=self.product, image=make_photo((1000, 1000)))
+        path = photo.image.storage.path(variant_name(photo.image.name, 400))
+        before = os.path.getmtime(path)
+        os.utime(path, (before - 100, before - 100))
+        photo.order = 5
+        photo.save()
+        self.assertEqual(os.path.getmtime(path), before - 100)
+
+    def test_api_returns_largest_webp(self):
+        ProductImage.objects.create(product=self.product, image=make_photo((2000, 2000)))
+        images = self.client.get("/api/products/hoodie/").json()["images"]
+        self.assertTrue(images[0].endswith("_1600.webp"))
+
+    def test_optimize_images_command_processes_old_photos(self):
+        photo = ProductImage.objects.create(product=self.product, image=make_photo((1000, 1000)))
+        storage = photo.image.storage
+        for size in SIZES:
+            storage.delete(variant_name(photo.image.name, size))
+        self.assertEqual(self.client.get("/api/products/hoodie/").json()["images"][0], f"http://testserver{photo.image.url}")
+
+        call_command("optimize_images", stdout=io.StringIO())
+        self.assertTrue(has_variants(photo.image))

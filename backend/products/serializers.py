@@ -18,5 +18,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_images(self, obj):
         request = self.context.get("request")
-        urls = [img.image.url for img in obj.images.all()]
+        # Самый большой WebP. Меньшие размеры фронтенд берёт по имени файла (_400, _800)
+        urls = [img.variant_url() for img in obj.images.all()]
         return [request.build_absolute_uri(u) for u in urls] if request else urls
