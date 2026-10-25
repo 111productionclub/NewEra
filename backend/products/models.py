@@ -1,6 +1,11 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
+from .images import LARGEST, make_variants, variant_name
+
+# Фото с телефона весят 3–12 МБ. Сжимаем сами, поэтому лимит только от совсем огромных файлов
+MAX_UPLOAD_MB = 30
+
 
 class Product(models.Model):
     class Category(models.TextChoices):
@@ -66,5 +71,18 @@ class ProductImage(models.Model):
         return f"{self.product.name}: фото {self.pk}"
 
     def clean(self):
-        if self.image and self.image.size > 10 * 1024 * 1024:
-            raise ValidationError({"image": "Файл больше 10 МБ. Сожмите фото перед загрузкой."})
+        if self.image and self.image.size > MAX_UPLOAD_MB * 1024 * 1024:
+            raise ValidationError({"image": f"Файл больше {MAX_UPLOAD_MB} МБ. Сожмите фото перед загрузкой."})
+
+    def save(self, *args, **kwargs):
+        # _committed=False значит, что файл только что загрузили (а не поменяли, например, порядок)
+        is_new_file = bool(self.image) and not self.image._committed
+        super().save(*args, **kwargs)
+        if is_new_file:
+            make_variants(self.image)
+
+    def variant_url(self, size=LARGEST):
+        name = variant_name(self.image.name, size)
+        storage = self.image.storage
+        # Пока старое фото не прошло optimize_images, отдаём оригинал, чтобы сайт не сломался
+        return storage.url(name) if storage.exists(name) else self.image.url
